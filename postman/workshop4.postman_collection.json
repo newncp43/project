@@ -1,0 +1,297 @@
+{
+	"info": {
+		"_postman_id": "d040dd1d-7965-46dc-a6d9-c504f651e9d5",
+		"name": "workshop4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Insert user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"should have key mongo_id\", function () {",
+							"    pm.expect(jsonData.data).to.have.property('student_id');",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\" : \"6130203136\",\n    \"first_name\" : \"natchaphon\",\n    \"last_name\" : \"chaloemsong\",\n   \"gender\" : \"male\",\n    \"age\" : 20,\n  \"height\": 180,\n    \"weight\": 74.2\n }\n"
+				},
+				"url": {
+					"raw": "{{apiUrl}}/user",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Should return data json 12 fields\", function () {",
+							"    pm.expect(Object.keys(jsonData.data[0]).length).to.eql(12);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/user/",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find users sort by age order by asc",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Should return data json 12 fields\", function () {",
+							"    pm.expect(Object.keys(jsonData.data[0]).length).to.eql(12);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/user/?sort_by=age&order=asc",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"user",
+						""
+					],
+					"query": [
+						{
+							"key": "sort_by",
+							"value": "age"
+						},
+						{
+							"key": "order",
+							"value": "asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find user sort by age order by desc",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Should return data json 12 fields\", function () {",
+							"    pm.expect(Object.keys(jsonData.data[0]).length).to.eql(12);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/user/?sort_by=age&order=desc",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"user",
+						""
+					],
+					"query": [
+						{
+							"key": "sort_by",
+							"value": "age"
+						},
+						{
+							"key": "order",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"should have key mongo_id\", function () {",
+							"    pm.expect(jsonData.data).to.have.property('user_id');",
+							"})",
+							"",
+							"pm.test(\"should have key modified_count\", function () {",
+							"    pm.expect(jsonData.data).to.have.property('modified_count');",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"height\": 180,\n  \"weight\" : 74\n}"
+				},
+				"url": {
+					"raw": "{{apiUrl}}/user/6130203136",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"user",
+						"613203136"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find books by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Should return data json 12 fields\", function () {",
+							"    pm.expect(Object.keys(jsonData.data).length).to.eql(12);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/user/6130203136",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"user",
+						"6130203136"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"should have key mongo_id\", function () {",
+							"    pm.expect(jsonData.data).to.have.property('student_id');",
+							"})",
+							"",
+							"pm.test(\"should have key deleted_count\", function () {",
+							"    pm.expect(jsonData.data).to.have.property('deleted_count');",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "var jsonData = pm.response.json();\n\npm.test(\"should have key mongo_id\", function () {\n    pm.expect(jsonData.data).to.have.property('student_id');\n})\n\npm.test(\"should have key modified_count\", function () {\n    pm.expect(jsonData.data).to.have.property('deleted_count');\n})"
+				},
+				"url": {
+					"raw": "{{apiUrl}}/students/6130203136",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"user",
+						"6130203136"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
